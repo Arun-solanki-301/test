@@ -6,18 +6,68 @@ import {
   View,
   StyleSheet,
 } from "react-native";
+import {
+  validPassword,
+  passwordLengthValidation,
+  emailLengthValidation,
+  emailOtherValidation,
+} from "../formFunctions/LoginFunction";
 import axios from "axios";
 
 const Login = ({ navigation }) => {
-  const [userName, setuserName] = useState("");
+  const [userName, setuserEmail] = useState("");
   const [userPassword, setuserPassword] = useState("");
+  // const [isEmailLengthValid, setIsEmailLengthValid] = useState(true);
+  const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  // const [isEmailValid, setIsEmailValid] = useState(true);
+//   const [formSubmit, setFormSubmit] = useState(false);
   const [DataStatus, setDataStatus] = useState(false);
   const [count, setCount] = useState(0);
 
 
   const formValidate = () => {
-    LoginData()
-    };
+
+    setCount(1);
+
+    // email validation............
+    if (emailLengthValidation(userEmail)) {
+      setIsEmailLengthValid(true);
+      // console.log('kllllllllllll')
+      if (emailOtherValidation(userEmail)) setIsEmailValid(true);
+      else setIsEmailValid(false);
+    } else {
+      setIsEmailLengthValid(false);
+    }
+    // password Validations................
+    if (passwordLengthValidation(userPassword)) {
+      setIsPasswordLengthValid(true);
+      if (validPassword(userPassword)) setIsPasswordValid(true);
+      else setIsPasswordValid(false);
+    } else {
+      setIsPasswordLengthValid(false);
+    }
+    if (
+    isEmailLengthValid &&
+    isPasswordLengthValid &&
+    isPasswordValid &&
+    isEmailValid &&
+    count
+  ) {
+    
+ LoginData()
+  }
+  };
+
+  // console.log(
+  //   isEmailLengthValid,
+  //   isPasswordLengthValid,
+  //   isPasswordValid,
+  //   isEmailValid,
+  //   count
+  // );
+  // form submit or not
+  
 
   const LoginData = () => {
     const Url =
@@ -25,18 +75,19 @@ const Login = ({ navigation }) => {
     axios
       .post(Url)
       .then(
-        (res) => {
+        (res , error) => {
+          console.log(res)
       // navigation.navigate("Output")
-      console.log(res)
 
-          if (res.error === 0)  {
-            console.log("asbjasknaskasnf ,trueeee")
+          if (res.status >= 200) {
             setDataStatus(true);
           }
-          else{
-            console.log("asbjasknaskasnf ,false")
-          }
         },
+        (error) => {
+          if (res.status < 200) {
+            setDataStatus(false);
+          }
+        }
       );
   };
 
@@ -57,13 +108,18 @@ const Login = ({ navigation }) => {
         </Text>
       </View>
       <TextInput
-        placeholder="user Name"
+        placeholder="Email"
         style={styles.formInputs}
         value={userName}
         onChangeText={(e) => {
-          setuserName(e);
+          setuserEmail(e);
         }}
       />
+      {/* {isEmailLengthValid ? null : <Text>field should not empty</Text>}
+            {isEmailValid?null:<Text>wrong email</Text>} */}
+      {isEmailLengthValid && isEmailValid ? null : (
+        <Text>incorrect email pattern</Text>
+      )}
 
       <TextInput
         placeholder="Password"
@@ -73,6 +129,11 @@ const Login = ({ navigation }) => {
           setuserPassword(e);
         }}
       />
+      {/* {isPasswordLengthValid ? null : <Text>field should not empty</Text>}
+            {isPasswordValid?null:<Text>password should contain numeric as well as alphabets</Text>} */}
+      {isPasswordLengthValid && isPasswordValid ? null : (
+        <Text>incorrect password pattern</Text>
+      )}
       <View style={{ display: "flex", alignItems: "center" }}>
         <TouchableOpacity
           style={styles.submitForm}
@@ -89,7 +150,7 @@ const Login = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      {/* {DataStatus && <Text>Fail login </Text>} */}
+      {DataStatus && <Text>Fail login </Text>}
 
     </View>
   );
