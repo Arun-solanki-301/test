@@ -5,44 +5,50 @@ import {
   Text,
   View,
   StyleSheet,
+  ActivityIndicator
 } from "react-native";
 import axios from "axios";
 
 const Login = ({ navigation }) => {
   const [userName, setuserName] = useState("");
   const [userPassword, setuserPassword] = useState("");
-  const [DataStatus, setDataStatus] = useState(false);
-  const [count, setCount] = useState(0);
+  const [DataStatus, setDataStatus] = useState({ staus: false, msg: "" });
+  const [formStatus, setformStatus] = useState({ status: false, msg: "" });
+  const [lodding , setlodding] = useState(false);
 
+ 
 
   const formValidate = () => {
-    LoginData()
-    };
+    if (userName.length === 0 || userPassword.length === 0) {
+      setformStatus({ status: true, msg: "fiels should not be empty" });
+    } else {
+      setDataStatus({staus : true , msg : ""});
+      setformStatus({status : false , msg : ""});
+      setlodding(true)
+      LoginData(userName , userPassword);
+     
+    }
+  };
 
-  const LoginData = () => {
-    const Url =
-      `https://secure-refuge-14993.herokuapp.com/login?username=${userName}&password=${userPassword}`;
-    axios
-      .post(Url)
-      .then(
-        (res) => {
-      // navigation.navigate("Output")
-      console.log(res)
+  const LoginData = (name , password) => {
 
-          if (res.error === 0)  {
-            console.log("asbjasknaskasnf ,trueeee")
-            setDataStatus(true);
-          }
-          else{
-            console.log("asbjasknaskasnf ,false")
-          }
-        },
-      );
+      const Url =`https://secure-refuge-14993.herokuapp.com/login?username=${name}&password=${password}`;
+      axios.post(Url).then((res) => {
+        if (res.data.error === 0) {
+          navigation.navigate("Output");
+          setDataStatus({staus : true , msg : ""});
+          console.log(res);
+        }
+        setlodding(false)
+        if (res.data.error === 1) {
+          setDataStatus({ staus: true, msg: res.data.data });
+        }
+      });
   };
 
   return (
     <View style={styles.FormBody}>
-      
+       
       <View>
         <Text
           style={{
@@ -69,10 +75,13 @@ const Login = ({ navigation }) => {
         placeholder="Password"
         style={styles.formInputs}
         value={userPassword}
+        secureTextEntry={true}
         onChangeText={(e) => {
           setuserPassword(e);
         }}
       />
+      {formStatus.status && <Text style={{fontSize : 12, color : "red"}}>{formStatus.msg}</Text>}
+
       <View style={{ display: "flex", alignItems: "center" }}>
         <TouchableOpacity
           style={styles.submitForm}
@@ -89,11 +98,12 @@ const Login = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      {/* {DataStatus && <Text>Fail login </Text>} */}
-
+             
+      {DataStatus.staus && <Text>{DataStatus.msg}</Text>}
+      {lodding ? <ActivityIndicator size = "large" color="red"/> : null}
     </View>
-  );
-};
+  );    
+}
 
 const styles = StyleSheet.create({
   FormBody: {

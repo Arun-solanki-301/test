@@ -1,86 +1,51 @@
-import React , {useState} from "react";
-import { TextInput, TouchableOpacity, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
-import { validPassword  , passwordLengthValidation , emailLengthValidation , emailOtherValidation , passwordConfirmation} from '../formFunctions/LoginFunction'
+import React, { useState } from "react";
+import {
+  TextInput,
+  TouchableOpacity,
+  Text,
+  View,
+  StyleSheet,
+  ActivityIndicator
+} from "react-native";
 import axios from "axios";
-function SignUp({navigation}){
-    const [userEmail, setuserEmail] = useState("");
-    const [userPassword, setuserPassword] = useState("");
-    const [confirmPassword, setconfirmPassword] = useState("");
-    const [isEmailLengthValid, setIsEmailLengthValid] = useState(true);
-    const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(true);
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
-    const [isEmailValid, setIsEmailValid] = useState(true);
-    const [isConfirm , setIsConfirm] = useState(true);
-    const [DataStatus, setDataStatus] = useState(false);
-    const [count, setCount] = useState(0);
 
-    const formValidate = () => {
-        setCount(1);
-        // email validation............
-        if (emailLengthValidation(userEmail)) {
-          setIsEmailLengthValid(true);
-          if (emailOtherValidation(userEmail)) setIsEmailValid(true);
-          else setIsEmailValid(false);
-        } else {
-          setIsEmailLengthValid(false);
-        }
+const SignUp = ({ navigation }) => {
+  const [userName, setuserName] = useState("");
+  const [userPassword, setuserPassword] = useState("");
+  const [confirmPassword , setconfirmPassword] = useState("");
+  const [DataStatus, setDataStatus] = useState({ staus: false, msg: "" });
+  const [formStatus, setformStatus] = useState({ status: false, msg: "" });
+  const [lodding , setlodding] = useState(false);
+ 
 
-        // password Validations................
-        if (passwordLengthValidation(userPassword)) {
-          setIsPasswordLengthValid(true);
-          if (validPassword(userPassword)) setIsPasswordValid(true);
-          else setIsPasswordValid(false);
-        } else {
-          setIsPasswordLengthValid(false);
-        }
-
-        // confirm password validation......
-        if(passwordConfirmation(userPassword , confirmPassword)){
-            setIsConfirm(true)
-        }else{
-            setIsConfirm(false)
-        }
-
-        // console.log(userEmail ,userPassword , confirmPassword)
-        // console.log(isEmailLengthValid ,isPasswordLengthValid , isPasswordValid, isEmailValid, isConfirm , count)
-
-        if (
-            isEmailLengthValid &&
-            isPasswordLengthValid &&
-            isPasswordValid &&
-            isEmailValid &&
-            isConfirm &&
-            count
-          ) {
-              SignUpData()
-          }
+  const formValidate = () => {
+    if (userName.length === 0 || userPassword.length === 0 || confirmPassword.length === 0) {
+      setformStatus({ status: true, msg: "field should not be empty" });
+    } else if (userPassword !== confirmPassword){
+      setformStatus({ status: true, msg: "password not match" });
     }
-// form validation ends........................................
-const SignUpData = () => {
-    const Url =
-      "https://secure-refuge-14993.herokuapp.com/add_user?username=admin&password=admin&role=admin";
-    axios
-      .post(Url, {
-        username: userEmail,
-        password: userPassword,
-        confirm_Password : confirmPassword
-      })
-      .then(
-        (res) => {
-      navigation.navigate("Output")
-
-          if (res.status >= 200) {
-            setDataStatus(true);
-          }
-        },
-        (error) => {
-          if (res.status < 200) {
-            setDataStatus(false);
-          }
-        }
-      );
+    else {
+      setformStatus({status : false , msg : ""});
+      setlodding(true)
+      SignUpData(userName , userPassword);
+    }
   };
 
+  const SignUpData = (name , password) => {
+
+      const Url =`https://secure-refuge-14993.herokuapp.com/add_user?username=${name}&password=${password}&role=${password}`;
+      axios.post(Url).then((res) => {
+        if (res.data.error === 0) {
+          navigation.navigate("Output");
+          setDataStatus({staus : true , msg : ""});
+          console.log(res);
+        }
+        setlodding(false)
+        if (res.data.error === 1) {
+          setDataStatus({ staus: true, msg: res.data.message });
+        }
+      });
+  };
 
     return(
         <View style={styles.FormBody}> 
@@ -88,24 +53,19 @@ const SignUpData = () => {
         <View style={styles.container}>
         <Text style={{fontSize : 25 , fontWeight : "bold" , color :"#1a73e8" , textAlign : "center", marginBottom : 25}}>Register With Polling App</Text>
         </View>
-        <TextInput placeholder=" Email" style={styles.formInputs} value={userEmail} onChangeText={(e)=>setuserEmail(e)}/>
-        {isEmailLengthValid && isEmailValid ? null : (
-        <Text>incorrect email pattern</Text>
-      )}
-        <TextInput placeholder="Password" style={styles.formInputs} value={userPassword} onChangeText={(e)=>setuserPassword(e)}/>
-        {isPasswordLengthValid && isPasswordValid ? null : (
-        <Text>incorrect password pattern</Text>
-      )}
-        <TextInput placeholder="Confirm Password" style={styles.formInputs} value={confirmPassword} onChangeText={(e)=>setconfirmPassword(e)}/>
-        {isConfirm? null : 
-        <Text>incorrect password pattern</Text>}
-
+        <TextInput placeholder=" Name" style={styles.formInputs} value={userName} onChangeText={(e)=>setuserName(e)}/>
+        <TextInput placeholder="Password" secureTextEntry={true}  style={styles.formInputs} value={userPassword} onChangeText={(e)=>setuserPassword(e)}/>
+      
+        <TextInput placeholder="Confirm Password" secureTextEntry={true} style={styles.formInputs} value={confirmPassword} onChangeText={(e)=>setconfirmPassword(e)}/>
+        {formStatus.status && <Text style={{fontSize : 12, color : "red"}}>{formStatus.msg}</Text>}
         <View style={{display : "flex", alignItems : "center"}}>
         <TouchableOpacity style={styles.submitForm} onPress={()=>formValidate()}><Text style={styles.submitText} >Sign Up</Text></TouchableOpacity>
         <TouchableOpacity style={styles.signUpOnLogin} onPress={() =>
         navigation.navigate('Home')}><Text style={styles.signUpOnLoginText} >already a user? login instead</Text></TouchableOpacity>
         </View>
-        {DataStatus && <Text>Fail login </Text>}
+        
+         {DataStatus.staus && <Text>{DataStatus.msg}</Text>}
+         {lodding ? <ActivityIndicator size = "large" color="red"/> : null}
         </View>
     )
 }
