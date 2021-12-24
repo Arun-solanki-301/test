@@ -38,7 +38,7 @@ const SignUp = ({ navigation }) => {
         if (res.data.error === 0) {
           navigation.navigate("Output");
           setDataStatus({staus : true , msg : ""});
-          console.log(res);
+          // console.log(res);
         }
         setlodding(false)
         if (res.data.error === 1) {
