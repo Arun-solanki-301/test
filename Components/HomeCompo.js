@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-// import { TouchableOpacity } from "react-native-gesture-handler";
+
 
 const Output = ({ navigation }) => {
   const [Data, setData] = useState([]);
-  const [checkedStatus , setCheckedStatus] = useState(false);
+
 
   useEffect(() => {
     pollData();
@@ -18,71 +18,21 @@ const Output = ({ navigation }) => {
     setData(res.data.data);
   };
 
-  // provide ids ........
-  let newArr = [];
-  const checkboxPress = (id, option) => {
-    Data.forEach((ques) => {
-      if (ques._id === id) {
-        // console.log(id, ques, option);
-        newArr.push({
-          id: id,
-          option_text: option,
-        });
-        // console.log(newArr)
-      }
-    });
-
-    // Data?.forEach((curr) => {
-    //   curr.options.forEach((elem) => {
-    //     if (id === elem.id) {
-    //       if (!newArr.includes(id)) {
-    //         newArr.push(id);
-    //       } else newArr.filter((value) => value.id !== id);
-    //     }
-    //     console.log(newArr, "aaaaaaaaaaaaa");
-    //   });
-    // });
-  };
-
-  // const getChecked = (id, option) => {
-  //   let checked = false
-  //   newArr.forEach(val=>{
-  //     if(val.id === id){
-  //       if(val.option_text === option){
-  //         checked = true
-  //       }
-  //     }
-  //   })
-  //   console.log(id, option, checked)
-  //   return checked
-  // }
-  // console.log(Data)
-
-  let newlyArr = [];
-  var count = 0;
-  Data?.forEach((curr)=>{
-    curr.options.forEach((elem)=>{
-      elem.id = count;
-      count++
-    })
-  })
-  //hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-  const handleCheckedBox = (element)=>{
-    Data?.forEach((curr)=>{
-      curr.options.forEach((elem)=>{
-        if(elem.id === element.id){
-          if(!newlyArr.includes(element.id)){
-            newlyArr.push(element.id)
+  const handleCheckedBox = (option,Qid)=>{
+    setData(Data?.map((curr)=>{
+      if(Qid == curr._id){
+        curr.options.map((elem)=>{
+          if(elem.option === option){
+            elem.checked = elem.checked ? !elem.checked: true;
           }
-        }
-        else newlyArr.filter((value) => value !== element.id)
-      })
-    })
-    // setCheckedStatus(!checkedStatus)
-    console.log(newlyArr)
+        })
+      }
+      console.log(curr)
+      return curr
+    }))
   }
-
-
+ 
+ 
 
   return (
     <ScrollView>
@@ -96,7 +46,7 @@ const Output = ({ navigation }) => {
                 return (
                   <View key={i} style={styles.container}>
                     <View style={styles.checkboxContainer}>
-                      <TouchableOpacity style={checkedStatus ? styles.checkboxTrue : styles.checkboxOpt} onPress={()=>handleCheckedBox(opcurr)}> 
+                      <TouchableOpacity  style={opcurr.checked ? styles.checkboxTrue : styles.checkboxOpt} onPress={()=>handleCheckedBox(opcurr.option, curr._id)}> 
                         <Text></Text>
                         </TouchableOpacity>
                         <Text>{opcurr.option}</Text>
@@ -149,7 +99,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginRight: 10,
     borderRadius: 5,
-    backgroundColor: "green",
+    backgroundColor: "#1a73e8",
   },
   container: {
     flex: 1,
@@ -165,7 +115,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginRight: 15,
     backgroundColor: "blue"
-  },
-});
+  }
+})
 
-export default Output;
+export default Output 
