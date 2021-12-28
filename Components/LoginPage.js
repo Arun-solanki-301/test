@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
       const Url =`https://secure-refuge-14993.herokuapp.com/login?username=${name}&password=${password}`;
       axios.post(Url).then((res) => {
         if (res.data.error === 0) {
-          navigation.navigate("User list");
+          navigation.navigate("All Polls");
           setDataStatus({staus : true , msg : ""});
           // console.log(res);
         }

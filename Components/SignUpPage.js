@@ -37,7 +37,7 @@ const SignUp = ({ navigation }) => {
       const Url =`https://secure-refuge-14993.herokuapp.com/add_user?username=${name}&password=${password}&role=${password}`;
       axios.post(Url).then((res) => {
         if (res.data.error === 0) {
-          navigation.navigate("Output");
+          navigation.navigate("All Polls");
           setDataStatus({staus : true , msg : ""});
           // console.log(res);
         }

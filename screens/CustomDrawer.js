@@ -30,15 +30,28 @@ function CustomDrawer({ navigation }) {
             <Text style={styles.drawerBtnsText}>Create poll</Text>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("User list");
+            navigation.navigate("Users List");
+          }}
+          style={styles.drawerBtns}
+        >
+          <View style={styles.BtnDiv}>
+            <Icon name="users" size={25} color="#fff" />
+            <Text style={styles.drawerBtnsText}>Users List</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("All Polls");
           }}
           style={styles.drawerBtns}
         >
           <View style={styles.BtnDiv}>
             <Icon name="list" size={25} color="#fff" />
-            <Text style={styles.drawerBtnsText}>User list</Text>
+            <Text style={styles.drawerBtnsText}>All Polls</Text>
           </View>
         </TouchableOpacity>
       </View>

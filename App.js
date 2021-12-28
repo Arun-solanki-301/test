@@ -5,12 +5,12 @@ import Login from "./Components/LoginPage";
 import SignUp from "./Components/SignUpPage";
 import Output from "./Components/HomeCompo";
 import Addpoll from "./Components/AddPoll";
+import UserList from "./Components/UserList";
 import Root from "./screens/Drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
-// import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -27,8 +27,9 @@ const App = () => {
         />
         <Stack.Screen name="Home" component={Login} />
         <Stack.Screen name="Register" component={SignUp} />
-        <Stack.Screen name="User list" component={Output} />
+        <Stack.Screen name="All Polls" component={Output} />
         <Stack.Screen name="Create poll" component={Addpoll} />
+        <Stack.Screen name="Users List" component={UserList} />
       </Stack.Navigator>
     </NavigationContainer>
   );
