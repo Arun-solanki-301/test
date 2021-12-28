@@ -89,7 +89,7 @@ const Addpoll = ({navigation})=>{
             </View>
 
            {Datastatus.status &&<Text style={{fontSize : 16 , color : Datastatus.color , marginTop : 15} }> {Datastatus.text}</Text>}
-           {lodding ? <ActivityIndicator size = "large" color="red"/> : null}
+           {lodding ? <ActivityIndicator size = "large" color="red" style={{marginTop : 20}}/> : null}
       </View>
     )
 }

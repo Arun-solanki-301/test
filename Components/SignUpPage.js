@@ -66,7 +66,7 @@ const SignUp = ({ navigation }) => {
         </View>
         
          {DataStatus.staus && <Text style={{fontSize : 16, marginTop:15 , color : "green"}}>{DataStatus.msg}</Text>}
-         {lodding ? <ActivityIndicator size = "large" color="red"/> : null}
+         {lodding ? <ActivityIndicator size = "large" color="red" style={{marginTop : 20}}/> : null}
         </View>
     )
 }

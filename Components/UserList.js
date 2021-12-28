@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {Text , View , ActivityIndicator, StyleSheet , SafeAreaView} from 'react-native'
 import axios from "axios";
-// import { SafeAreaView } from "react-native-safe-area-context";
+
 import { FlatList } from "react-native-gesture-handler"
 import { useState } from "react/cjs/react.development";
 
@@ -25,7 +25,7 @@ const UserList = ()=>{
     return(
       
         <View style = {{height : "100%", overflow : "scroll"}}>
-            {lodding ? <ActivityIndicator size = "large" color="red"/> : null}
+            {lodding ? <ActivityIndicator size = "large" color="red" style={{marginTop : 20}}/> : null}
             <View style = {styles.users}><Text style = {styles.headerText}>UserName</Text><Text style = {styles.headerText} >Role</Text></View>
             <FlatList data={UserData} renderItem={({item})=>{
                 return (

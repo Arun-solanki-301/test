@@ -32,7 +32,7 @@ function CustomDrawer({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => {
+          onPress={() => {  
             navigation.navigate("Users List");
           }}
           style={styles.drawerBtns}

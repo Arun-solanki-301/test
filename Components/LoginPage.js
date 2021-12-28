@@ -111,7 +111,7 @@ const Login = ({ navigation }) => {
 
 
       {DataStatus.staus && <Text>{DataStatus.msg}</Text>}
-      {lodding ? <ActivityIndicator size = "large" color="red"/> : null}
+      {lodding ? <ActivityIndicator size = "large" color="red" style={{marginTop : 20}}/> : null}
     </View>
   );    
 }
