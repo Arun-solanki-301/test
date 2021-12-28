@@ -6,6 +6,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const Output = ({ navigation }) => {
   const [Data, setData] = useState([]);
+  // const [voteCount , setvoteCount] = useState(0)
 
 
   useEffect(() => {
@@ -16,8 +17,8 @@ const Output = ({ navigation }) => {
     const Url = "https://secure-refuge-14993.herokuapp.com/list_polls";
     let res = await axios.get(Url);
     setData(res.data.data);
+    // console.log(res.data.data)
   };
-
   const handleCheckedBox = (option,Qid)=>{
     let vote = 0;
     setData(Data?.map((curr)=>{
@@ -30,6 +31,7 @@ const Output = ({ navigation }) => {
             elem.checked = elem.checked ? !elem.checked: true;
             elem.vote = vote + 1
           }
+
         })
       }
       return curr
