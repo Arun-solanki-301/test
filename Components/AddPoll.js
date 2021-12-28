@@ -19,8 +19,16 @@ const Addpoll = ({navigation})=>{
 
 
     const OnpressSendData = ()=>{
-        setlodding(true)
-        SendData(question , opt1 , opt2 , opt3 , opt4);
+        if(question && opt1 && opt2 && opt3 && opt4){
+            setlodding(true)
+            SendData(question , opt1 , opt2 , opt3 , opt4);
+        }else{
+            setDataStatus({
+                status : true,
+                text : "input field should not be empty !!!",
+                color : "red"
+            })
+        }
         setQuestion("");
         setOpt1("")
         setOpt2("")

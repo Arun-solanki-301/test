@@ -27,6 +27,7 @@ const SignUp = ({ navigation }) => {
     else {
       setformStatus({status : false , msg : ""});
       setlodding(true)
+      
       SignUpData(userName , userPassword);
     }
   };
@@ -64,7 +65,7 @@ const SignUp = ({ navigation }) => {
         navigation.navigate('Home')}><Text style={styles.signUpOnLoginText} >already a user? login instead</Text></TouchableOpacity>
         </View>
         
-         {DataStatus.staus && <Text>{DataStatus.msg}</Text>}
+         {DataStatus.staus && <Text style={{fontSize : 16, marginTop:15 , color : "green"}}>{DataStatus.msg}</Text>}
          {lodding ? <ActivityIndicator size = "large" color="red"/> : null}
         </View>
     )
