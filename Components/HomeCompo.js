@@ -19,21 +19,23 @@ const Output = ({ navigation }) => {
   };
 
   const handleCheckedBox = (option,Qid)=>{
+    let vote = 0;
     setData(Data?.map((curr)=>{
       if(Qid == curr._id){
+       
         curr.options.map((elem)=>{
+          elem.checked = false
+          elem.vote = 0;
           if(elem.option === option){
             elem.checked = elem.checked ? !elem.checked: true;
+            elem.vote = vote + 1
           }
         })
       }
-      console.log(curr)
       return curr
     }))
   }
  
- 
-
   return (
     <ScrollView>
     <View>

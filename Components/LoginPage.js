@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
       const Url =`https://secure-refuge-14993.herokuapp.com/login?username=${name}&password=${password}`;
       axios.post(Url).then((res) => {
         if (res.data.error === 0) {
-          navigation.navigate("Output");
+          navigation.navigate("User list");
           setDataStatus({staus : true , msg : ""});
           // console.log(res);
         }
@@ -98,7 +98,18 @@ const Login = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-             
+
+
+      {/* <TouchableOpacity
+          style={styles.signUpOnLogin}
+          onPress={() => navigation.navigate("Addpoll")}
+        >
+          <Text style={styles.signUpOnLoginText}>
+            go to the add poll screen
+          </Text>
+        </TouchableOpacity> */}
+
+
       {DataStatus.staus && <Text>{DataStatus.msg}</Text>}
       {lodding ? <ActivityIndicator size = "large" color="red"/> : null}
     </View>
