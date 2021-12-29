@@ -8,6 +8,7 @@ import { useState } from "react/cjs/react.development";
 const UserList = ()=>{
     const [UserData , setUserData] = useState("");
     const [lodding , setlodding] = useState(false)
+    
     useEffect(()=>{
         setlodding(true)
         Data();
@@ -22,12 +23,15 @@ const UserList = ()=>{
             setlodding(false)
         })
     }
+    const _handleRefresh = () => {
+
+    };
     return(
       
         <View style = {{height : "100%", overflow : "scroll"}}>
-            {lodding ? <ActivityIndicator size = "large" color="red" style={{marginTop : 20 , position :"relative", top : "50%"}}/> : null}
+            {lodding ? <ActivityIndicator size = "large" color="#1a73e8" style={{marginTop : 20 , position :"relative", top : "50%"}}/> : null}
             <View style = {styles.users}><Text style = {styles.headerText}>UserName</Text><Text style = {styles.headerText} >Role</Text></View>
-            <FlatList data={UserData} renderItem={({item})=>{
+            <FlatList data={UserData} onRefresh={_handleRefresh} renderItem={({item})=>{
                 return (
                 <View style = {styles.users}>
                     <Text style = {styles.ItemText}>{item.username}</Text>

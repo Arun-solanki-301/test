@@ -11,11 +11,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
+import { useState } from "react/cjs/react.development";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const App = () => {
+  const [isLogin , setIsLogin] = useState(false)
   return (
     <NavigationContainer>
       {/* <Root /> */}
@@ -25,8 +27,8 @@ const App = () => {
           component={Root}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Home" component={Login} />
-        <Stack.Screen name="Register" component={SignUp} />
+        <Stack.Screen options={{headerShown: false}} name="Home"  component={Login} />
+        <Stack.Screen options={{headerShown: false}} name="Register"  component={SignUp}/>
         <Stack.Screen name="All Polls" component={Output} />
         <Stack.Screen name="Create poll" component={Addpoll} />
         <Stack.Screen name="Users List" component={UserList} />

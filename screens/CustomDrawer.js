@@ -21,9 +21,7 @@ function CustomDrawer({ navigation }) {
       }
       getUserName(); 
 
-    
-     
-    }, []);
+    }, [GetName]);
     const clearLocal = () =>{
       AsyncStorage.removeItem('token');
       AsyncStorage.removeItem('username');
@@ -41,7 +39,7 @@ function CustomDrawer({ navigation }) {
     <View style={styles.container}>
       <View style={styles.drawerUpper}>
         <View style={{display  :"flex" , flexDirection : "column" , alignItems : "flex-end", marginHorizontal  :15}}>
-          <Image source={require('../Assets/user1.jpg')} style={{width : 50 , height : 50, borderRadius : "50%"}} />
+          <Image source={require('../Assets/user1.jpg')} style={{width : 50 , height : 50, borderRadius : 50}}/>
           <TouchableOpacity onPress={()=>gotoLogin()}>
           <Text style={{fontSize : 18, color : "#fff" , textAlign : "center"}}>{GetName ? GetName : "not Login"}</Text></TouchableOpacity>
         </View>

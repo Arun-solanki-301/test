@@ -15,11 +15,11 @@ const Drawer = createDrawerNavigator();
 function Root() {
     return (
       <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
-        <Drawer.Screen name="Home" component={Login} />
-        <Drawer.Screen name="signUp" component={SignUp} />
+        <Drawer.Screen options={{headerShown: false}} name="Home" component={Login} />
+        <Drawer.Screen options={{headerShown: false}} name="Register" component={SignUp} />
         <Drawer.Screen name="All Polls" component={Output} />
         <Drawer.Screen name="Create poll" component={Addpoll} />
-        <Drawer.Screen name="Users List" component={UserList} />
+        <Drawer.Screen name="Users List" component={UserList} /> 
       </Drawer.Navigator>
     );
   }

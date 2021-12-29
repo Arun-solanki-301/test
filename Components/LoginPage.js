@@ -19,7 +19,7 @@ const Login = ({ navigation }) => {
   const [getName , setGetName] = useState("");
 
   useEffect(()=>{
-    async function getUserName() {
+    const getUserName = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
         if (token !== null) {
@@ -35,12 +35,14 @@ const Login = ({ navigation }) => {
 
   const formValidate = () => {
     if (userName.length === 0 || userPassword.length === 0) {
-      setformStatus({ status: true, msg: "fiels should not be empty" });
+      setformStatus({ status: true, msg: "Fields should not be empty" });
     } else {
       setDataStatus({staus : true , msg : ""});
       setformStatus({status : false , msg : ""});
       setlodding(true)
       LoginData(userName , userPassword);
+      setuserName("")
+      setuserPassword("")
      
     }
   };
@@ -60,6 +62,10 @@ const Login = ({ navigation }) => {
             setDataStatus({ staus: true, msg: res.data.data });
           }
         }
+        setTimeout(() => {
+          setDataStatus({staus : true , msg : ""});
+      setformStatus({status : false , msg : ""});
+        }, 3000);
       });
   };
 
@@ -76,7 +82,6 @@ const Login = ({ navigation }) => {
   
   return (
     <View style={styles.FormBody}>
-       
       <View>
         <Text
           style={{
@@ -85,13 +90,15 @@ const Login = ({ navigation }) => {
             color: "#1a73e8",
             textAlign: "center",
             marginBottom: 25,
+            marginTop : 50
           }}
-        >
+          >
           Polling App
         </Text>
+          {DataStatus.staus && <Text style={{textAlign :"center" , fontSize : 18 , color :"red"}}>{DataStatus.msg}</Text>}
       </View>
       <TextInput
-        placeholder="user Name"
+        placeholder="Username"
         style={styles.formInputs}
         value={userName}
         onChangeText={(e) => {
@@ -126,20 +133,7 @@ const Login = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-
-
-      {/* <TouchableOpacity
-          style={styles.signUpOnLogin}
-          onPress={() => navigation.navigate("Addpoll")}
-        >
-          <Text style={styles.signUpOnLoginText}>
-            go to the add poll screen
-          </Text>
-        </TouchableOpacity> */}
-
-
-      {DataStatus.staus && <Text>{DataStatus.msg}</Text>}
-      {lodding ? <ActivityIndicator size = "large" color="red" style={{marginTop : 20}}/> : null}
+      {lodding ? <ActivityIndicator size = "large" color="#1a73e8" style={{marginTop : 20}}/> : null}
     </View>
   );    
 }
@@ -187,7 +181,7 @@ const styles = StyleSheet.create({
   },
   signUpOnLoginText: {
     fontSize: 15,
-    color: "red",
+    color: "#1a73e8",
   },
   formTextError: {
     color: "red",

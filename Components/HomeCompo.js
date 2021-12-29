@@ -4,14 +4,13 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 
-const Output = ({ navigation }) => {
+
+const Output = ({ navigation} ) => {
   const [Data, setData] = useState([]);
-  // const [voteCount , setvoteCount] = useState(0)
-
-
   useEffect(() => {
     pollData();
   }, []);
+  
 
   const pollData = async () => {
     const Url = "https://secure-refuge-14993.herokuapp.com/list_polls";
