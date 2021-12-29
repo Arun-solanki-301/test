@@ -65,7 +65,7 @@ const SignUp = ({ navigation }) => {
         </Text>
       </View>
       <TextInput
-        placeholder=" Name"
+        placeholder="Username"
         style={styles.formInputs}
         value={userName}
         onChangeText={(e) => setuserName(e)}
