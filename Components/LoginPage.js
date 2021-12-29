@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextInput,
   TouchableOpacity,
@@ -8,6 +8,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
   const [userName, setuserName] = useState("");
@@ -15,7 +16,21 @@ const Login = ({ navigation }) => {
   const [DataStatus, setDataStatus] = useState({ staus: false, msg: "" });
   const [formStatus, setformStatus] = useState({ status: false, msg: "" });
   const [lodding , setlodding] = useState(false);
+  const [getName , setGetName] = useState("");
 
+  useEffect(()=>{
+    async function getUserName() {
+      try {
+        const token = await AsyncStorage.getItem('token');
+        if (token !== null) {
+            navigation.navigate("All Polls")
+        }
+        }catch {
+        console.log(error)
+        }
+    }
+    getUserName();
+  })
  
 
   const formValidate = () => {
@@ -34,18 +49,31 @@ const Login = ({ navigation }) => {
 
       const Url =`https://secure-refuge-14993.herokuapp.com/login?username=${name}&password=${password}`;
       axios.post(Url).then((res) => {
-        if (res.data.error === 0) {
-          navigation.navigate("All Polls");
-          setDataStatus({staus : true , msg : ""});
-          // console.log(res);
-        }
-        setlodding(false)
-        if (res.data.error === 1) {
-          setDataStatus({ staus: true, msg: res.data.data });
+        if(res.status === 200){
+          if (res.data.error === 0) {
+            navigation.navigate("All Polls");
+            setDataStatus({staus : true , msg : ""});
+            storage(res.data , name)
+          }
+          setlodding(false)
+          if (res.data.error === 1) {
+            setDataStatus({ staus: true, msg: res.data.data });
+          }
         }
       });
   };
 
+  const storage = async (data , name)=>{
+    try { 
+      await AsyncStorage.setItem('token', String(data.token));
+      await AsyncStorage.setItem('username', name);
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  
   return (
     <View style={styles.FormBody}>
        

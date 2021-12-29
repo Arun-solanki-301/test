@@ -18,7 +18,7 @@ function Root() {
         <Drawer.Screen name="Home" component={Login} />
         <Drawer.Screen name="signUp" component={SignUp} />
         <Drawer.Screen name="All Polls" component={Output} />
-        <Drawer.Screen name="Addpoll" component={Addpoll} />
+        <Drawer.Screen name="Create poll" component={Addpoll} />
         <Drawer.Screen name="Users List" component={UserList} />
       </Drawer.Navigator>
     );

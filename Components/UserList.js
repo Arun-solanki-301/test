@@ -25,7 +25,7 @@ const UserList = ()=>{
     return(
       
         <View style = {{height : "100%", overflow : "scroll"}}>
-            {lodding ? <ActivityIndicator size = "large" color="red" style={{marginTop : 20}}/> : null}
+            {lodding ? <ActivityIndicator size = "large" color="red" style={{marginTop : 20 , position :"relative", top : "50%"}}/> : null}
             <View style = {styles.users}><Text style = {styles.headerText}>UserName</Text><Text style = {styles.headerText} >Role</Text></View>
             <FlatList data={UserData} renderItem={({item})=>{
                 return (
