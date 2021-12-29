@@ -32,6 +32,9 @@ function CustomDrawer({ navigation }) {
       if(!GetName){
         navigation.navigate("Home");
       }
+      else{
+        navigation.navigate("All Polls");
+      }
     }
 
     
@@ -45,7 +48,7 @@ function CustomDrawer({ navigation }) {
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Home");
+            gotoLogin()
           }}
           style={styles.drawerBtns}
         >
