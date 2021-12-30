@@ -48,7 +48,7 @@ const Output = ({ navigation} ) => {
           style={{ position : "absolute" , top : 330 , left : 190}}
         />
       ) : null}
-    <View>
+    <View style={{ marginTop:30,}}>
       {Data?.map((curr, i) => {
         return (
           <View key={i}>

@@ -77,7 +77,7 @@ const Addpoll = ({ navigation }) => {
   };
 
   return (
-    <View style={{ marginHorizontal: 25 }}>
+    <View style={{ marginHorizontal: 25  }}>
       <Text
         style={{
           fontSize: 25,
@@ -85,7 +85,7 @@ const Addpoll = ({ navigation }) => {
           color: "#1a73e8",
           textAlign: "center",
           marginBottom: 15,
-          marginTop: 20,
+          marginTop:20,
         }}
       >
         Add Your Poll

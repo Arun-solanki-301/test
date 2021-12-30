@@ -27,9 +27,9 @@ const App = () => {
           component={Root}
           options={{ headerShown: false }}
         />
-        <Stack.Screen options={{headerShown: false}} name="Home"  component={Login} />
+        <Stack.Screen options={{headerShown: false , backgroundColor: 'red',}} name="Home"  component={Login} />
         <Stack.Screen options={{headerShown: false}} name="Register"  component={SignUp}/>
-        <Stack.Screen name="All Polls" component={Output} />
+        <Stack.Screen option ={{headerTintColor: '#fff',}}  name="All Polls" component={Output} />
         <Stack.Screen name="Create poll" component={Addpoll} />
         <Stack.Screen name="Users List" component={UserList} />
       </Stack.Navigator>
