@@ -57,14 +57,16 @@ const styles = StyleSheet.create({
         textAlign : "center",
         marginTop:15,
         marginBottom : 15,
+        width : "50%"
         // textDecoration : "underline",
         // textDecorationColor : "#1a73e8"
     },
     ItemText : {
         fontSize :  16,
-        textAlign : "left",
+        textAlign : "center",
         marginTop:10,
         marginBottom : 10,  
+        width : "50%"
     }
 })
 

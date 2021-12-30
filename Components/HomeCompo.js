@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity , ActivityIndicator } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 
 
 const Output = ({ navigation} ) => {
   const [Data, setData] = useState([]);
+  const [lodding , setloading] = useState(false)
   useEffect(() => {
+    setloading(true)
     pollData();
   }, []);
   
@@ -16,7 +18,7 @@ const Output = ({ navigation} ) => {
     const Url = "https://secure-refuge-14993.herokuapp.com/list_polls";
     let res = await axios.get(Url);
     setData(res.data.data);
-    // console.log(res.data.data)
+    setloading(false)
   };
   const handleCheckedBox = (option,Qid)=>{
     let vote = 0;
@@ -39,6 +41,13 @@ const Output = ({ navigation} ) => {
  
   return (
     <ScrollView>
+      {lodding ? (
+        <ActivityIndicator
+          size="large"
+          color="#1a73e8"
+          style={{ position : "absolute" , top : 330 , left : 190}}
+        />
+      ) : null}
     <View>
       {Data?.map((curr, i) => {
         return (

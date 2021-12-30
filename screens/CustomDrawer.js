@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Text, TouchableOpacity, View, StyleSheet , Image } from "react-native";
-import Login from "../Components/LoginPage";
-import SignUp from "../Components/SignUpPage";
+// import Login from "../Components/LoginPage";
+// import SignUp from "../Components/SignUpPage";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -41,12 +41,12 @@ function CustomDrawer({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.drawerUpper}>
-        <View style={{display  :"flex" , flexDirection : "column" , alignItems : "flex-end", marginHorizontal  :15}}>
+        <View style={{display  :"flex" , flexDirection : "column" , alignItems : "center", marginHorizontal  :15 , marginBottom : 25}}>
           <Image source={require('../Assets/user1.jpg')} style={{width : 50 , height : 50, borderRadius : 50}}/>
           <TouchableOpacity onPress={()=>gotoLogin()}>
           <Text style={{fontSize : 18, color : "#fff" , textAlign : "center"}}>{GetName ? GetName : "not Login"}</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             gotoLogin()
           }}
@@ -56,7 +56,7 @@ function CustomDrawer({ navigation }) {
             <Icon name="home" size={25} color="#fff" />
             <Text style={styles.drawerBtnsText}>Home</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Create poll");
@@ -106,7 +106,7 @@ function CustomDrawer({ navigation }) {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             navigation.navigate("Register");
           }}
@@ -116,7 +116,7 @@ function CustomDrawer({ navigation }) {
             <Icon name="sign-out" size={25} color="#fff" />
             <Text style={styles.drawerBtnsText}>signup</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
