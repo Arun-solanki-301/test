@@ -48,7 +48,7 @@ const Addpoll = ({ navigation }) => {
   };
 
   const SendData = (question, opt1, opt2, opt3, opt4) => {
-    const Url = `https://secure-refuge-14993.herokuapp.com/add_poll?title=${question}%20polll&options=${opt1}____${opt2}____${opt3}____${opt4}`;
+    const Url = `https://secure-refuge-14993.herokuapp.com/add_poll?title=${question}%20&options=${opt1}____${opt2}____${opt3}____${opt4}`;
     axios
       .post(Url)
       .then((res) => {
@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderRadius: 5,
     marginBottom: 15,
+    height : 42
   },
   submitForm: {
     backgroundColor: "#1a73e8",
