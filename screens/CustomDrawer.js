@@ -44,7 +44,7 @@ function CustomDrawer({ navigation }) {
         <View style={{display  :"flex" , flexDirection : "column" , alignItems : "center", marginHorizontal  :15 , marginBottom : 25}}>
           <Image source={require('../Assets/user1.jpg')} style={{width : 50 , height : 50, borderRadius : 50}}/>
           <TouchableOpacity onPress={()=>gotoLogin()}>
-          <Text style={{fontSize : 18, color : "#fff" , textAlign : "center"}}>{GetName ? GetName : "not Login"}</Text></TouchableOpacity>
+          <Text style={{fontSize : 18, color : "#fff" , textAlign : "center"}}>{GetName}</Text></TouchableOpacity>
         </View>
         {/* <TouchableOpacity
           onPress={() => {
