@@ -7,8 +7,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const Polls = (props) => {
   const Data = props.Data;
-  const handleCheckedBox = props.handleCheckedBox;
-  const submitPoll = props.submitPoll;
+ 
 
   return (
     <ScrollView>

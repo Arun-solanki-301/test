@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Text, TouchableOpacity, View, StyleSheet , Image } from "react-native";
-// import Login from "../Components/LoginPage";
-// import SignUp from "../Components/SignUpPage";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -46,17 +44,6 @@ function CustomDrawer({ navigation }) {
           <TouchableOpacity onPress={()=>gotoLogin()}>
           <Text style={{fontSize : 18, color : "#fff" , textAlign : "center"}}>{GetName}</Text></TouchableOpacity>
         </View>
-        {/* <TouchableOpacity
-          onPress={() => {
-            gotoLogin()
-          }}
-          style={styles.drawerBtns}
-        >
-          <View style={styles.BtnDiv}>
-            <Icon name="home" size={25} color="#fff" />
-            <Text style={styles.drawerBtnsText}>Home</Text>
-          </View>
-        </TouchableOpacity> */}
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Create poll");
@@ -106,17 +93,7 @@ function CustomDrawer({ navigation }) {
           </View>
         </TouchableOpacity>
 
-        {/* <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Register");
-          }}
-          style={{...styles.drawerBtns }}
-        >
-          <View style={styles.BtnDiv}>
-            <Icon name="sign-out" size={25} color="#fff" />
-            <Text style={styles.drawerBtnsText}>signup</Text>
-          </View>
-        </TouchableOpacity> */}
+       
       </View>
     </View>
   );
@@ -130,11 +107,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   drawerBtns: {
-    // borderWidth: 1,
+  
     borderColor: "#ccc",
     padding: 5,
-    // backgroundColor: "#ccc",
-    // width: 150,
+  
     marginBottom: 10,
     borderRadius: 5,
   },
@@ -151,7 +127,7 @@ const styles = StyleSheet.create({
   BtnDiv :{
       display : "flex",
       flexDirection : "row",
-    //   justifyContent : "space-around",
+  
       alignItems : "center",
       marginHorizontal : 18
 

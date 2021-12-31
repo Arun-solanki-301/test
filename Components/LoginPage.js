@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
   const [DataStatus, setDataStatus] = useState({ staus: false, msg: "" });
   const [formStatus, setformStatus] = useState({ status: false, msg: "" });
   const [lodding , setlodding] = useState(false);
-  const [getName , setGetName] = useState("");
+
 
   useEffect(()=>{
     const getUserName = async () => {
@@ -33,7 +33,7 @@ const Login = ({ navigation }) => {
   })
  
 
-  const formValidate = () => {
+  const LoginValidate = () => {
     if (userName.length === 0 || userPassword.length === 0) {
       setformStatus({ status: true, msg: "Fields should not be empty" });
     } else {
@@ -81,7 +81,7 @@ const Login = ({ navigation }) => {
 
   
   return (
-    <View style={styles.FormBody}>
+    <View style={styles.FormBody }>
       <View>
         <Text
           style={{
@@ -120,7 +120,7 @@ const Login = ({ navigation }) => {
       <View style={{ display: "flex", alignItems: "center" }}>
         <TouchableOpacity
           style={styles.submitForm}
-          onPress={() => formValidate()}
+          onPress={() => LoginValidate()}
         >
           <Text style={styles.submitText}>Log In</Text>
         </TouchableOpacity>
@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
     padding: 15,
     width: "100%",
     height: "100%",
+    
   },
   formInputs: {
     borderColor: "#cccccc",

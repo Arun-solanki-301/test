@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  ActivityIndicator,
+ 
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
@@ -37,7 +37,7 @@ const Poll = ({ curr }) => {
   };
 
   return (
-    <View>
+    <View >
       <Text style={styles.TitleOfPoll}>{curr.title}</Text>
       <View>
         {curr.options.map((opcurr, i) => {
@@ -76,6 +76,7 @@ const Poll = ({ curr }) => {
 export default Poll;
 
 const styles = StyleSheet.create({
+
   TitleOfPoll: {
     fontSize: 25,
     color: "#1a73e8",
